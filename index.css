@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold-primary: #d4af37;
+  --gold-light: #f1d77a;
+  --gold-dark: #a8872c;
+  --royal-red: #7b1113;
+  --royal-red-dark: #5a090a;
+  --royal-blue: #0b1a2e;
+  --ivory: #fff8e1;
+  --sandstone: #d2b48c;
+  --marigold: #e0a800;
+  --marble-gray: #e6e4df;
+}
+
+@layer base {
+  body {
+    @apply bg-[#0b1a2e] text-[#fff8e1] overflow-x-hidden;
+    font-family: 'Cormorant Garamond', serif;
+    background-color: var(--royal-blue);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+@layer utilities {
+  /* Textures */
+  .bg-sandstone {
+    background-color: var(--sandstone);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  }
+
+  .bg-marble {
+    background-color: var(--marble-gray);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+  }
+
+  .bg-silk-red {
+    background: linear-gradient(135deg, #7b1113 0%, #5a090a 50%, #8b0000 100%);
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.6);
+  }
+
+  .bg-silk-blue {
+    background: linear-gradient(135deg, #162a44 0%, #0b1a2e 50%, #061121 100%);
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.7);
+  }
+
+  /* Gold & Metallic Effects */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 30%, var(--gold-light) 50%, var(--gold-primary) 70%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-gold-metallic {
+    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 30%, var(--gold-light) 50%, var(--gold-primary) 70%, var(--gold-dark) 100%);
+  }
+
+  .border-gold-metallic {
+    border-image: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 30%, var(--gold-light) 50%, var(--gold-primary) 70%, var(--gold-dark) 100%) 1;
+  }
+
+  .border-gold-solid {
+    border-color: var(--gold-primary);
+  }
+
+  /* Structural Elements */
+  .engraved {
+    box-shadow: inset 2px 2px 6px rgba(0,0,0,0.6), inset -2px -2px 6px rgba(255,255,255,0.1);
+  }
+  
+  .embossed {
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.8), -1px -1px 1px rgba(255,255,255,0.2);
+  }
+
+  .shadow-soft-diffuse {
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.7);
+  }
+
+  /* Missing utility classes used in components */
+  .text-ivory {
+    color: var(--ivory);
+  }
+
+  .text-marigold {
+    color: var(--marigold);
+  }
+
+  .text-gold-dark {
+    color: var(--gold-dark);
+  }
+
+  .bg-ivory {
+    background-color: var(--ivory);
+  }
+
+  .border-gold-dark {
+    border-color: var(--gold-dark);
+  }
+
+  /* Lighting & Overlays */
+  .warm-light-overlay {
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+  }
+
+  .fire-glow {
+    box-shadow: 0 0 40px 10px rgba(212, 175, 55, 0.4), inset 0 0 20px 5px rgba(212, 175, 55, 0.4);
+  }
+}
+
+/* Animations */
+@keyframes flicker {
+  0% { opacity: 0.8; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.8; transform: scale(0.95); }
+}
+.animate-flicker {
+  animation: flicker 3s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+}
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--gold-light);
+  border-radius: 50%;
+  animation: drift linear infinite;
+  box-shadow: 0 0 6px 2px rgba(241, 215, 122, 0.4);
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(100vh) rotate(180deg); opacity: 0; }
+}
+.petal {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--marigold);
+  border-radius: 50% 0 50% 0; /* Leaf/petal shape */
+  animation: fall linear infinite;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.scalloped-arch {
+  clip-path: polygon(0% 100%, 0% 20%, 5% 15%, 15% 10%, 25% 15%, 35% 10%, 45% 15%, 50% 5%, 55% 15%, 65% 10%, 75% 15%, 85% 10%, 95% 15%, 100% 20%, 100% 100%);
+}
+
+.jharokha-arch {
+  clip-path: polygon(0% 100%, 0% 30%, 20% 10%, 40% 5%, 50% 0%, 60% 5%, 80% 10%, 100% 30%, 100% 100%);
+}
+
